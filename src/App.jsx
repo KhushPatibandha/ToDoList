@@ -1,46 +1,37 @@
 import { useState } from "react";
 
 export default function ToDoList() {
-
-  const [task, setTask] = useState([])
-  const [newTask, setNewTask] = useState('')
+  const [tasksArr, setTasksArr] = useState([])
+  const [newTask, setNewTask] = useState("")
 
   const handleAccept = () => {
-    setTask (
-      [
-        ...task,
-        newTask
-      ]
-    )
-    setNewTask('')
+    setTasksArr([...tasksArr, newTask])
+    setNewTask("")
   }
 
   const handleDelete = (index) => {
-    const updateTask = [...task]
+    const updateTask = [...tasksArr]
     updateTask.splice(index, 1)
-    setTask(updateTask)
+    setTasksArr(updateTask)
   }
 
   return (
     <div>
-
       <h1>To Do List</h1>
-      <input type="text" onChange={e => setNewTask(e.target.value)}/>
+      <input type="text" placeholder="Enter Task to add" onChange={e => setNewTask(e.target.value)}/>
       <button onClick={handleAccept}>
         Add Task
       </button>
-
       <ul>
-        {task.map((task, index) => (
+        {tasksArr.map((tasksArr, index) => (
           <li key={index}>
-            {task}
+            {tasksArr}
             <button onClick={() => handleDelete(index)}>
-              Delete task
+              Delete Task
             </button>
           </li>
         ))}
       </ul>
-      
     </div>
   )
 }
